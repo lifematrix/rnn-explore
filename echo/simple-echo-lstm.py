@@ -34,7 +34,7 @@ batchY_placeholder = tf.placeholder(tf.int32, [batch_size, truncated_backprop_le
 
 cell_state = tf.placeholder(tf.float32, [batch_size, state_size])
 hidden_state = tf.placeholder(tf.float32, [batch_size, state_size])
-init_state = tf.nn.rnn_cell.LSTMStateTuple(cell_state, dtype=tf.float32)
+init_state = tf.nn.rnn_cell.LSTMStateTuple(cell_state, hidden_state)
 
 #W = tf.Variable(np.random.rand(state_size+1, state_size), dtype=tf.float32)
 #b = tf.Variable(np.zeros((1,state_size)), dtype=tf.float32)
