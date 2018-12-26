@@ -56,7 +56,7 @@ cell = tf.nn.rnn_cell.MultiRNNCell([cell]*num_layers, state_is_tuple=True)
 print(cell)
 print(rnn_tuple_state)
 print(inputs_series)
-states_series, current_state = tf.nn.static_rnn(cell, inputs_series, initial_state=rnn_tuple_state, dtype=tf.float32)
+states_series, current_state = tf.nn.dynamic_rnn(cell, inputs_series, initial_state=rnn_tuple_state)
 #
 # Forward pass
 #current_state = init_state
