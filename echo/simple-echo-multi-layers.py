@@ -53,9 +53,10 @@ labels_series = tf.unstack(batchY_placeholder, axis=1)
 # cell = tf.nn.rnn_cell.BasicRNNCell(state_size)
 cell = tf.nn.rnn_cell.BasicLSTMCell(state_size, state_is_tuple=True)
 cell = tf.nn.rnn_cell.MultiRNNCell([cell]*num_layers, state_is_tuple=True)
+print(cell)
+print(rnn_tuple_state)
+print(inputs_series)
 states_series, current_state = tf.nn.static_rnn(cell, inputs_series, initial_state=rnn_tuple_state, dtype=tf.float32)
-print(states_series)
-print(current_state)
 #
 # Forward pass
 #current_state = init_state
