@@ -35,7 +35,7 @@ batchY_placeholder = tf.placeholder(tf.int32, [batch_size, truncated_backprop_le
 
 #cell_state = tf.placeholder(tf.float32, [batch_size, state_size])
 #hidden_state = tf.placeholder(tf.float32, [batch_size, state_size])
-init_state = tf.placeholder(tf.float32, [num_layers,2,batch_size,state_size])
+init_state = tf.placeholder(tf.float32, [num_layers,batch_size,state_size])
 state_per_layer_list = tf.unstack(init_state, axis=0)
 rnn_tuple_state = tuple([tf.nn.rnn_cell.LSTMStateTuple(state_per_layer_list[idx][0], state_per_layer_list[idx][1]) \
                         for idx in range(num_layers)])
