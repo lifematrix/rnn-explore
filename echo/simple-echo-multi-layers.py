@@ -53,11 +53,8 @@ print("inputs_series: ", inputs_series)
 print("labels_series: ", labels_series)
 
 # cell = tf.nn.rnn_cell.BasicRNNCell(state_size)
-cell = tf.nn.rnn_cell.LSTMCell(state_size, state_is_tuple=True)
-cell = tf.nn.rnn_cell.MultiRNNCell([cell]*num_layers, state_is_tuple=True)
-print(cell)
-print(rnn_tuple_state)
-print(inputs_series)
+cell = [tf.nn.rnn_cell.LSTMCell(state_size, state_is_tuple=True) for _ in range(num_layers)]
+cell = tf.nn.rnn_cell.MultiRNNCell(cell, state_is_tuple=True)
 states_series, current_state = tf.nn.static_rnn(cell, inputs_series, initial_state=rnn_tuple_state)
 #
 # Forward pass
