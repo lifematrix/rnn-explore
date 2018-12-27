@@ -122,12 +122,11 @@ with tf.Session() as sess:
             _total_loss, _train_step, _current_state, _predictions_series = sess.run(
                 [total_loss, train_step, current_state, predictions_series],
                 feed_dict={
-                    batchX_placeholder:batchX,
-                    batchY_placeholder:batchY,
-                    init_state:_current_state,
+                    batchX_placeholder: batchX,
+                    batchY_placeholder: batchY,
+                    init_state: _current_state,
                 })
 
-            _current_cell_state, _current_hidden_state = _current_state
             loss_list.append(_total_loss)
 
             if batch_idx%100 == 0:
