@@ -48,15 +48,17 @@ b2 = tf.Variable(np.zeros((1,num_classes)), dtype=tf.float32)
 # inputs_series = tf.unstack(batchX_placeholder, axis=1)
 inputs_series = tf.split(batchX_placeholder, truncated_backprop_length, axis=1)
 labels_series = tf.unstack(batchY_placeholder, axis=1)
-#print("inputs: %s, labels: %s" % (inputs_series.get_shape(), labels_series.get_shape()))
+# print("inputs: %s, labels: %s" % (inputs_series.get_shape(), labels_series.get_shape()))
+print("inputs_series: ", inputs_series)
+print("labels_series: ", labels_series)
 
 # cell = tf.nn.rnn_cell.BasicRNNCell(state_size)
-cell = tf.nn.rnn_cell.BasicLSTMCell(state_size, state_is_tuple=True)
+cell = tf.nn.rnn_cell.LSTMCell(state_size, state_is_tuple=True)
 cell = tf.nn.rnn_cell.MultiRNNCell([cell]*num_layers, state_is_tuple=True)
 print(cell)
 print(rnn_tuple_state)
 print(inputs_series)
-states_series, current_state = tf.nn.dynamic_rnn(cell, inputs_series, initial_state=rnn_tuple_state)
+states_series, current_state = tf.nn.static_rnn(cell, inputs_series, initial_state=rnn_tuple_state)
 #
 # Forward pass
 #current_state = init_state
