@@ -44,7 +44,6 @@ b2 = tf.Variable(np.zeros((1,num_classes)), dtype=tf.float32)
 
 cell = [tf.nn.rnn_cell.LSTMCell(state_size, state_is_tuple=True) for _ in range(num_layers)]
 cell = tf.nn.rnn_cell.MultiRNNCell(cell, state_is_tuple=True)
-#states_series, current_state = tf.nn.static_rnn(cell, inputs_series, initial_state=rnn_tuple_state)
 states_series, current_state = tf.nn.dynamic_rnn(cell, tf.expand_dims(batchX_placeholder, -1), initial_state=rnn_tuple_state)
 states_series = tf.reshape(states_series, [-1, state_size])
 
